@@ -1,21 +1,23 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Main {
 
 	public static void main(String[] args) {
-		/*TSP tsp = new TSP(4);
-
-		LinkedList<Arete> arbre = tsp.arbreKruskal();
-
-		tsp.afficherArbre(arbre);*/
-		Graphe a = new Graphe("graph1.csv");
-		DijkstraV1 d = new DijkstraV1(1, a);
-		PlusCourtChemin p = new PlusCourtChemin(1, 1);
-		//p.affichePCC(d, 1, 2);
-		//a.visualiser();
-		Graphe g = a.RandomGraphe(5, 10);
-		g.visualiser();
+		long startTime = System.currentTimeMillis();
+		Graphe a = new Graphe();
+		Graphe g = a.RandomGraphe(5,10);
+		DijkstraV1 d = new DijkstraV1(1, g);
+		PlusCourtChemin p = new PlusCourtChemin(1, 5);
+		p.affichePCC(d, 1, 5);
+		long endTime = System.currentTimeMillis();
+		System.out.println(endTime - startTime);
+		
+		/*dijkstra v2 : faire systeme de comparaion entre noeud
+			remplir binary heap
+			classer
+			remove heap à chaque changement de noeuds
+			reclasser ce qu'il reste
+		*/
+			
 	}
 
 }

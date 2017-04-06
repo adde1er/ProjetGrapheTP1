@@ -3,12 +3,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class DijkstraV1 {
+public class DijkstraV2 {
 
 	public HashMap<Integer, PlusCourtChemin> chemins;
 	public Graphe graphe;
+	public BinaryHeap bh;
 
-	public DijkstraV1(int idDepart, Graphe graphe){
+	public DijkstraV2(int idDepart, Graphe graphe){
 		this.graphe = graphe;
 		chemins = new HashMap<Integer, PlusCourtChemin>();
 		process(init(idDepart));
@@ -22,6 +23,7 @@ public class DijkstraV1 {
 		while(it.hasNext()){
 			noeud = it.next();
 			id = noeud.getId();
+			bh.add(noeud);
 			chemins.put(id,new PlusCourtChemin(id, idDepart));
 			if(id == idDepart){
 				depart = noeud;

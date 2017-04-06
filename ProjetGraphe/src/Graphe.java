@@ -89,18 +89,26 @@ public class Graphe {
 	
 	public Graphe RandomGraphe(int n, int p){
 		Graphe g = new Graphe();
-		for (int i = 0; i < n; i++) {
-			g.ajouterNoeud(new Noeud(i+1));
-		}
 		Double d; 
 		int s; 
 		int f;
+		if(p >Math.pow(n, 2)-n){
+			System.out.println("Vous demandez un trop grand nombre d'arcs pour ce graphe");
+			return g;
+		}
+		for (int i = 1; i < n; i++) {
+			g.ajouterNoeud(new Noeud(i));
+		}
 		for (int i = 0; i < p; i++) {
-			d = Math.random()*(n+1);
-			s = d.intValue()+1;
-			d = Math.random()*(n+1);
-			f = d.intValue()+1;
-			g.ajouterArc(new Arc(s,f,Math.random()*25));
+			s=0;
+			f=0;
+			while(s==f){
+				d = Math.random()*(n);
+				s = d.intValue()+1;
+				d = Math.random()*(n);
+				f = d.intValue()+1;
+			}
+			g.ajouterArc(new Arc(s,f,Math.random()*2*n));
 		}
 		return g;
 	}
