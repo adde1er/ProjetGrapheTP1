@@ -86,5 +86,23 @@ public class Graphe {
 		}
 		return liste;
 	}
+	
+	public Graphe RandomGraphe(int n, int p){
+		Graphe g = new Graphe();
+		for (int i = 0; i < n; i++) {
+			g.ajouterNoeud(new Noeud(i+1));
+		}
+		Double d; 
+		int s; 
+		int f;
+		for (int i = 0; i < p; i++) {
+			d = Math.random()*(n+1);
+			s = d.intValue()+1;
+			d = Math.random()*(n+1);
+			f = d.intValue()+1;
+			g.ajouterArc(new Arc(s,f,Math.random()*25));
+		}
+		return g;
+	}
 }
 

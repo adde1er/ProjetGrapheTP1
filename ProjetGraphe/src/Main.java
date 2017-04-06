@@ -12,8 +12,10 @@ public class Main {
 		Graphe a = new Graphe("graph1.csv");
 		DijkstraV1 d = new DijkstraV1(1, a);
 		PlusCourtChemin p = new PlusCourtChemin(1, 1);
-		p.affichePCC(d, 1, 2);
+		//p.affichePCC(d, 1, 2);
 		//a.visualiser();
+		Graphe g = a.RandomGraphe(5, 10);
+		g.visualiser();
 	}
 
 }
