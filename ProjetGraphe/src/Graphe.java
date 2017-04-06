@@ -2,7 +2,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -73,6 +76,15 @@ public class Graphe {
 
 	public Noeud getNoeud(int id){
 		return noeuds.get(id);
+	}
+	
+	public ArrayList<Noeud> getListeNoeud(){
+		ArrayList<Noeud> liste = new ArrayList<Noeud>();
+		Iterator<Noeud> it = getNoeudsIt();
+		while (it.hasNext()){
+			liste.add(it.next());
+		}
+		return liste;
 	}
 }
 

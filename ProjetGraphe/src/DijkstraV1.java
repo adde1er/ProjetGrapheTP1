@@ -1,11 +1,12 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 public class DijkstraV1 {
 
-	private HashMap<Integer, PlusCourtChemin> chemins;
-	private Graphe graphe;
+	public HashMap<Integer, PlusCourtChemin> chemins;
+	public Graphe graphe;
 
 	public DijkstraV1(int idDepart, Graphe graphe){
 		this.graphe = graphe;
@@ -29,26 +30,48 @@ public class DijkstraV1 {
 		LinkedList<Arc> successeurs = depart.getSuccesseurs();
 		Arc arc;
 		chemins.get(depart.getId()).setCout(0);
+		chemins.get(depart.getId()).setMarque(true);
 		for(int i = 0; i<successeurs.size(); i++){
 			arc = successeurs.get(i);
 			chemins.get(arc.getFin()).setCout(arc.getPoids());
 		}
-
 		return depart;
 	}
 
 	private void process(Noeud depart){
+		ArrayList<Noeud> liste = graphe.getListeNoeud();
+		liste.toString();
 		int id = depart.getId();
 		LinkedList<Arc> successeurs = depart.getSuccesseurs();
-		Arc next;
 		Arc arc;
-		boolean end = false;
-		while (!end){
+		int next = id;
+		double min; 
+		for (int i = 0; i < chemins.size(); i++) {min = Double.MAX_VALUE -1;
 			chemins.get(id).setMarque(true);
-			for(int i = 0; i< successeurs.size(); i++){
-				arc = successeurs.get(i);
-				//TODO
+			successeurs = liste.get(id-1).getSuccesseurs();
+			for(int j = 0; j< successeurs.size(); j++){
+				arc = successeurs.get(j);
+				if (chemins.get(arc.getFin()).getCout() > chemins.get(arc.getDepart()).getCout()+arc.getPoids()){
+					chemins.get(arc.getFin()).setParent(id);
+					chemins.get(arc.getFin()).setCout(chemins.get(arc.getDepart()).getCout()+arc.getPoids());
+				}
 			}
+			for (Arc a : successeurs) {
+				if(chemins.get(a.getFin()).isMarque() == false){
+					if(chemins.get(a.getFin()).getCout()<= min){
+						min = chemins.get(a.getFin()).getCout();
+					}
+				}
+				
+			}
+			
+			for (Arc a : successeurs) {
+				if(chemins.get(a.getFin()).getCout() == min){
+					next = a.getFin();
+					break;
+				}
+			}
+			id = next;
 		}
 	}
 }
